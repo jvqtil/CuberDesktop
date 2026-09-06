@@ -101,10 +101,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Make Gradle wrapper executable
         run: chmod +x gradlew
-        
+
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
@@ -125,14 +125,13 @@ jobs:
         run: |
           mkdir -p release-assets
 
-          cp desktopApp/build/compose/binaries/main/deb/*.deb \
-            release-assets/
-
-          cp desktopApp/build/compose/binaries/main/rpm/*.rpm \
-            release-assets/
-
-          cp desktopApp/build/compose/binaries/main/app-image/*.AppImage \
-            release-assets/
+          find desktopApp/build/compose/binaries/main \
+            -type f \( \
+              -name "*.deb" -o \
+              -name "*.rpm" -o \
+              -name "*.AppImage" \
+            \) \
+            -exec cp {} release-assets/ \;
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
