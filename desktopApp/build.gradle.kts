@@ -34,7 +34,9 @@ kotlin {
 compose.desktop {
     application {
         mainClass = "dev.jvqtil.cuber.desktop.MainKt"
-        jvmArgs("--enable-native-access=ALL-UNNAMED")
+            jvmArgs(
+            "--enable-native-access=ALL-UNNAMED",
+        )
 
         nativeDistributions {
             packageName = "Cuber Desktop"
@@ -61,6 +63,10 @@ compose.desktop {
             macOS {
                 bundleID = "dev.jvqtil.cuber.desktop"
                 packageName = "Cuber Desktop"
+                iconFile.set(project.file("resources/cuber.icns"))
+                jvmArgs(
+                    "-Dapple.awt.application.appearance=system",
+                )
             }
 
             windows {
