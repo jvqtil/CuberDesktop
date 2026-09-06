@@ -1,0 +1,171 @@
+name: Release Cuber Desktop
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      - name: Build EXE
+        shell: pwsh
+        run: .\gradlew.bat :desktopApp:packageExe --no-daemon
+
+      - name: Build MSI
+        shell: pwsh
+        run: .\gradlew.bat :desktopApp:packageMsi --no-daemon
+
+      - name: Collect artifacts
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path release-assets
+
+          Copy-Item `
+            "desktopApp/build/compose/binaries/main/exe/*.exe" `
+            "release-assets/"
+
+          Copy-Item `
+            "desktopApp/build/compose/binaries/main/msi/*.msi" `
+            "release-assets/"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: release-assets/*
+          if-no-files-found: error
+
+  build-macos:
+    name: Build macOS
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      - name: Build DMG
+        run: ./gradlew :desktopApp:packageDmg --no-daemon
+
+      - name: Build PKG
+        run: ./gradlew :desktopApp:packagePkg --no-daemon
+
+      - name: Collect artifacts
+        run: |
+          mkdir -p release-assets
+
+          cp desktopApp/build/compose/binaries/main/dmg/*.dmg \
+            release-assets/
+
+          cp desktopApp/build/compose/binaries/main/pkg/*.pkg \
+            release-assets/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos
+          path: release-assets/*
+          if-no-files-found: error
+
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      - name: Build DEB
+        run: ./gradlew :desktopApp:packageDeb --no-daemon
+
+      - name: Build RPM
+        run: ./gradlew :desktopApp:packageRpm --no-daemon
+
+      - name: Build AppImage
+        run: ./gradlew :desktopApp:packageAppImage --no-daemon
+
+      - name: Collect artifacts
+        run: |
+          mkdir -p release-assets
+
+          cp desktopApp/build/compose/binaries/main/deb/*.deb \
+            release-assets/
+
+          cp desktopApp/build/compose/binaries/main/rpm/*.rpm \
+            release-assets/
+
+          cp desktopApp/build/compose/binaries/main/app-image/*.AppImage \
+            release-assets/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: release-assets/*
+          if-no-files-found: error
+
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs:
+      - build-windows
+      - build-macos
+      - build-linux
+
+    steps:
+      - name: Download Windows artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: windows
+          path: release-assets
+
+      - name: Download macOS artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: macos
+          path: release-assets
+
+      - name: Download Linux artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: linux
+          path: release-assets
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-assets/*
+          generate_release_notes: true
+          draft: false
+          prerelease: false
