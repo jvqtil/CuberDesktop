@@ -5,7 +5,7 @@
   Cuber
 </h1>
 
-[Cuber](https://github.com/jvqtil/Cuber) fork for desktop. Windows, MacOS, Linux supported
+**EXPERIMENTAL [Cuber](https://github.com/jvqtil/Cuber) fork** for desktop. Windows, MacOS and Linux supported
 
 [**Usage**](#usage)
 &nbsp;•&nbsp;
