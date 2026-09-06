@@ -279,18 +279,26 @@ fun TimerScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
-                    Text(
-                        text = TimeUtils.format(
-                            state.elapsedMs,
-                        ),
-                        style = MaterialTheme.typography.displayLarge.copy(
-                            fontSize = 96.sp,
-                            lineHeight = 104.sp,
-                            letterSpacing = (-3.5).sp,
-                        ),
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground,
-                    )
+                    Box(
+                        modifier = Modifier.width(360.dp),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text(
+                            text = TimeUtils.format(
+                                state.elapsedMs,
+                            ),
+                            modifier = Modifier.fillMaxWidth(),
+                            style = MaterialTheme.typography.displayLarge.copy(
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 96.sp,
+                                lineHeight = 104.sp,
+                                letterSpacing = (-2).sp,
+                            ),
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.onBackground,
+                        )
+                    }
 
                     Box(
                         modifier = Modifier
