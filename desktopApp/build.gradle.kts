@@ -34,7 +34,7 @@ kotlin {
 compose.desktop {
     application {
         mainClass = "dev.jvqtil.cuber.desktop.MainKt"
-            jvmArgs("--enable-native-access=ALL-UNNAMED")
+        jvmArgs("--enable-native-access=ALL-UNNAMED")
 
         nativeDistributions {
             packageName = "Cuber Desktop"
@@ -54,6 +54,8 @@ compose.desktop {
                 TargetFormat.Dmg,
                 TargetFormat.Pkg,
                 TargetFormat.Deb,
+                TargetFormat.Rpm,
+                TargetFormat.AppImage
             )
 
             macOS {
