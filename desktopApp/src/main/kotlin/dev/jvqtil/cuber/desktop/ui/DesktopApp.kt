@@ -78,7 +78,12 @@ fun DesktopApp(
     }
 
     DisposableEffect(screen) {
-        input.onEscape = if (screen == Screen.TIMER) null else ::back
+        input.onEscape = if (screen == Screen.TIMER) {
+            { navigate(Screen.SOLVES) }
+        } else {
+            ::back
+        }
+
         onDispose {
             input.onEscape = null
         }
