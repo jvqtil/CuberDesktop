@@ -5,7 +5,7 @@
   Cuber
 </h1>
 
-**EXPERIMENTAL [Cuber](https://github.com/jvqtil/Cuber) fork** for desktop. Windows, MacOS and Linux supported
+**Experimental [Cuber](https://github.com/jvqtil/Cuber) fork** for desktop. Windows, MacOS and Linux supported
 
 [**Usage**](#usage)
 &nbsp;•&nbsp;
@@ -22,9 +22,9 @@
 
 <table>
   <tr>
-    <td><img src="assets/screenshots/cuberdesktop_timer_screen.png" width="200" alt="Timer"></td>
-    <td><img src="assets/screenshots/cuberdesktop_stats_n_history_screen.png" width="200" alt="Statistics and solve history"></td>
-    <td><img src="assets/screenshots/cuberdesktop_solve_details_screen.png" width="200" alt="Solve details"></td>
+    <td><img src="assets/screenshots/cuberdesktop_timer_screen.png" width="400" alt="Timer"></td>
+    <td><img src="assets/screenshots/cuberdesktop_stats_n_history_screen.png" width="400" alt="Statistics and solve history"></td>
+    <td><img src="assets/screenshots/cuberdesktop_solve_details_screen.png" width="400" alt="Solve details"></td>
   </tr>
 </table>
 
