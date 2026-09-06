@@ -59,7 +59,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
-private const val RESET_DELAY_MS = 650L
+private const val RESET_DELAY_MS = 500L
 
 @Composable
 fun TimerScreen(
