@@ -23,7 +23,7 @@
 <table>
   <tr>
     <td><img src="assets/screenshots/cuberdesktop_timer_screen.png" width="400" alt="Timer"></td>
-    <td><img src="assets/screenshots/cuberdesktop_stats_n_history_screen.png" width="400" alt="Statistics and solve history"></td>
+    <td><img src="assets/screenshots/cuberdesktop_solves_screen.png" width="400" alt="Statistics and solve history"></td>
     <td><img src="assets/screenshots/cuberdesktop_solve_details_screen.png" width="400" alt="Solve details"></td>
   </tr>
 </table>
@@ -32,7 +32,7 @@
 
 ## Usage
 Click the timer to start/stop. **Long press** to reset.
-Use escape key to go back from any menu.
+Use escape key to go back from any menu. When pressed on timer screen - navigates to solves
 
 ## Features
 
