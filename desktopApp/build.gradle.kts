@@ -10,7 +10,6 @@ plugins {
 group = "dev.jvqtil.cuber"
 version = "1.2.0"
 
-
 dependencies {
     implementation(compose.desktop.currentOs)
     implementation(compose.material3)
@@ -40,7 +39,7 @@ compose.desktop {
 
         nativeDistributions {
             packageName = "Cuber Desktop"
-            packageVersion = "1.2.0"
+            packageVersion = version.toString()
             description = "A focused speedcubing timer and solve tracker"
             vendor = "Cuber"
             copyright = "© 2026 Cuber"
